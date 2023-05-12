@@ -27,7 +27,7 @@ import {
 
 export default class App extends Component<Props>{
   render(){
-    return React.createElement(Text, {style: styles.description}, "Rechercher des pays!");
+    return <Text style={styles.description}>Rechercher des pays du monde entier!</Text>;
   }
 }
 
