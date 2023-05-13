@@ -1,42 +1,40 @@
 import 'react-native-gesture-handler'
 import React, {Component} from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
+  TextInput,
   View,
+  Button,
+  ActivityIndicator,
+  Image,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-import {NavigationContainer} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-
-const styles = StyleSheet.create({
-  description: {
-    fontSize: 18,
-    textAlign: 'center',
-    color: '#656565',
-    marginTop: 65,
-  },
-});
-
-
+type Props = {};
 export default class PageDeRecherche extends Component<Props>{
   render(){
     return (
-        <Text style={styles.description}>Rechercher des pays du monde entier!</Text>      
+        <View style={styles.conteneur}>
+            <Text style ={styles.description}>
+                Rechercher des pays à explorer!
+            </Text>
+            <Text style ={styles.description}>
+                Rechercher par nom
+            </Text>
+        </View>     
     );
   }
 }
+
+const styles = StyleSheet.create({
+    description: {
+      fontSize: 18,
+      textAlign: 'center',
+      color: '#656565',
+      marginTop: 65,
+    },
+  });
+  
 
 
 
