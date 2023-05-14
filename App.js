@@ -19,7 +19,6 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import PageDeRecherche from './PageDeRecherche';
 
 const styles = StyleSheet.create({
   description: {
@@ -37,6 +36,13 @@ function MaPile(){
       <Pile.Screen name='Accueil' component={PageDeRecherche}/>
     </Pile.Navigator>
   );
+}
+class PageDeRecherche extends Component<Props>{
+  render(){
+    return (
+        <Text style={styles.description}>Rechercher des pays du monde entier!</Text>      
+    );
+  }
 }
 
 export default class App extends Component<Props>{
