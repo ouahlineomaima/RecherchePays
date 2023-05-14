@@ -29,6 +29,7 @@ export default class PageDeRecherche extends Component<Props>{
                     title='Démarrer'
                     />
                 </View>
+                <Image source={require('./Ressources/pays.jpg')} style={styles.image}/>
             </View>
         );
     }
@@ -62,6 +63,10 @@ const styles = StyleSheet.create({
         borderColor: '#48AAEC',
         borderRadius: 8,
         color: '#48AAEC',
+    },
+    image:{
+        width: 220,
+        height: 140,
     }
 });
 
