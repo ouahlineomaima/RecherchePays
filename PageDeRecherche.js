@@ -9,7 +9,19 @@ import {StyleSheet,
 } from 'react-native';
 type Props = {};
 export default class PageDeRecherche extends Component<Props>{
+    constructor(props){
+        super(props);
+        this.state={
+            requeteDeRecherche: 'morocco'
+        };
+    }
+    _auchangementDeLaRecherche = (event) =>{
+        console.log('_auChangementDeLaRecherche');
+        this.setState({requeteDeRecherche: event.text});
+        console.log('Current: '+this.state.requeteDeRecherche+', Next: '+event.nativeEvent.text);
+    }
     render() {
+        console.log('PageDeRecherche.rendu');
         return (
             <View style={styles.conteneur}>
                 <Text style={styles.description}>
@@ -22,6 +34,8 @@ export default class PageDeRecherche extends Component<Props>{
                     <TextInput 
                     underlineColorAndroid={'transparent'}
                     style={styles.requeteEntree}
+                    value={this.state.requeteDeRecherche}
+                    onChange={this._auchangementDeLaRecherche}
                     placeholder='Rechercher par nom de pays'/>
                     <Button 
                     onPress={()=>{}}
