@@ -17,21 +17,30 @@ export default class PageDeRecherche extends Component<Props>{
         this.state={
             requeteDeRecherche: 'morocco',
             estEnChangement: false,
+            message: '',
         };
     }
     _auchangementDeLaRecherche = (event) =>{
         this.setState({requeteDeRecherche: event.text});
     }
+    _gererLaReponse = (reponse) =>{
+        this.setState({estEnChangement: false, message: ''});
+        console.log('Nombre de pays trouvés: ' + reponse.length);
+    }
     _executerRequete = (requete) =>{
         console.log(requete);
         this.setState({estEnChangement: true});
+        fetch(requete)
+        .then(response => response.json())
+        .then(json => this._gererLaReponse(json))
+        .catch(error => this.setState({estEnChangement: false, message: 'Quelque chose de mauvais s\'est produit ' + error}))
     };
     _auDemarrageDeLaRecherche = () =>{
         const requete = urlPourRequete(this.state.requeteDeRecherche);
         this._executerRequete(requete);
     }
     render() {
-        const indicateurDeChangement = this.state.estEnChangement ? <ActivityIndicator size='large' color='0000ff'/> : null;
+
         return (
             <View style={styles.conteneur}>
                 <Text style={styles.description}>
@@ -54,7 +63,7 @@ export default class PageDeRecherche extends Component<Props>{
                     />
                 </View>
                 <Image source={require('./Ressources/pays.jpg')} style={styles.image}/>
-                {indicateurDeChangement}
+                <Text style={styles.description}>{this.state.message}</Text>
             </View>
         );
     }
