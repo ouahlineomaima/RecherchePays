@@ -21,7 +21,7 @@ export default class PageDeRecherche extends Component<Props>{
         };
     }
     _auchangementDeLaRecherche = (event) =>{
-        this.setState({requeteDeRecherche: event.text});
+        this.setState({requeteDeRecherche: event.nativeEvent.text});
     }
     _gererLaReponse = (reponse) =>{
         this.setState({estEnChangement: false, message: ''});
@@ -36,7 +36,8 @@ export default class PageDeRecherche extends Component<Props>{
         .catch(error => this.setState({estEnChangement: false, message: 'Quelque chose de mauvais s\'est produit ' + error}))
     };
     _auDemarrageDeLaRecherche = () =>{
-        const requete = urlPourRequete(this.state.requeteDeRecherche);
+        /* const requete = urlPourRequete(this.state.requeteDeRecherche); */
+        const requete = 'https://restcountries.com/v3.1/name/' + this.state.requeteDeRecherche
         this._executerRequete(requete);
     }
     render() {
