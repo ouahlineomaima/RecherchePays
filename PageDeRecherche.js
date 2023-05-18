@@ -25,7 +25,7 @@ export default class PageDeRecherche extends Component<Props>{
     }
     _gererLaReponse = (reponse) =>{
         this.setState({estEnChangement: false, message: ''});
-        console.log('Nombre de pays trouvés: ' + reponse.length);
+        this.props.navigation.navigate('Resultats', {listings: reponse});
     }
     _executerRequete = (requete) =>{
         console.log(requete);
@@ -36,8 +36,7 @@ export default class PageDeRecherche extends Component<Props>{
         .catch(error => this.setState({estEnChangement: false, message: 'Quelque chose de mauvais s\'est produit ' + error}))
     };
     _auDemarrageDeLaRecherche = () =>{
-        /* const requete = urlPourRequete(this.state.requeteDeRecherche); */
-        const requete = 'https://restcountries.com/v3.1/name/' + this.state.requeteDeRecherche
+        const requete = urlPourRequete(this.state.requeteDeRecherche);
         this._executerRequete(requete);
     }
     render() {
