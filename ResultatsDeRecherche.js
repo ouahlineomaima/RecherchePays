@@ -33,7 +33,6 @@ import {
         );
     }
  }
- 
  class ListItem extends React.PureComponent{
     _itemAppuye = ()=>{
         this.props.onPressItem(this.props.index);
@@ -60,6 +59,8 @@ import {
         );
     }
 }
+ 
+ 
  const styles = StyleSheet.create({
     conteneurTexte:{
         flex: 1

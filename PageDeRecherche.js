@@ -33,23 +33,23 @@ export default class PageDeRecherche extends Component<Props>{
         setEstEnChangement(true);
         fetch(requete)
             .then((response) => response.json())
-            .then((json) => gererLaReponse(json))
+            .then((json) => this._gererLaReponse(json))
             .catch(
                 (error) =>
                     setMessage("Quelque chose de mauvais s'est produit " + error),
                 setEstEnChangement(false)
             );
-    };
+    }
 
     const auDemarrageDeLaRecherche = () => {
-        /* const requete = urlPourRequete(requeteDeRecherche); */
-        const requete =
+        const requete = urlPourRequete(requeteDeRecherche);
+        /* const requete =
             'https://restcountries.com/v3.1/name/' + requeteDeRecherche;
-        executerRequete(requete);
-    };
+        executerRequete(requete); */
+    }
     _auDemarrageDeLaRecherche = () =>{
-        /* const requete = urlPourRequete(this.state.requeteDeRecherche); */
-        const requete = 'https://restcountries.com/v3.1/name/' + this.state.requeteDeRecherche
+        const requete = urlPourRequete(this.state.requeteDeRecherche);
+        /* const requete = 'https://restcountries.com/v3.1/name/' + this.state.requeteDeRecherche */
         this._executerRequete(requete);
     }
     render() {
@@ -112,5 +112,6 @@ const styles = StyleSheet.create({
     image: {
         width: 220,
         height: 140,
+        paddingTop:10,
     },
 });
