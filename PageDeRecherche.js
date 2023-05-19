@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import {
-    StyleSheet,
+import React, { Component } from 'react';
+import {StyleSheet,
     Text,
     TextInput,
     View,
@@ -18,68 +17,59 @@ export default class PageDeRecherche extends Component<Props>{
         this.state={
             requeteDeRecherche: 'morocco',
             estEnChangement: false,
-            message: '',
+            message: "fgjkfcy",
         };
     }
     _auchangementDeLaRecherche = (event) =>{
-        this.setState({requeteDeRecherche: event.nativeEvent.text});
+        this.setState({requeteDeRecherche: event.text});
     }
-    _gererLaReponse = (reponse) =>{
+    _gereLaReponse = (reponse) =>{
         this.setState({estEnChangement: false, message: ''});
-        console.log('Nombre de pays trouvés: ' + reponse.length);
+        this.props.navigation.navigate('Resultats', {listings: reponse});
     }
     _executerRequete = (requete) =>{
         console.log(requete);
-        setEstEnChangement(true);
+        this.setState({estEnChangement: true});
         fetch(requete)
-            .then((response) => response.json())
-            .then((json) => this._gererLaReponse(json))
-            .catch(
-                (error) =>
-                    setMessage("Quelque chose de mauvais s'est produit " + error),
-                setEstEnChangement(false)
-            );
-    }
-
-    const auDemarrageDeLaRecherche = () => {
-        const requete = urlPourRequete(requeteDeRecherche);
-        /* const requete =
-            'https://restcountries.com/v3.1/name/' + requeteDeRecherche;
-        executerRequete(requete); */
-    }
+        .then(reponse => reponse.json())
+        .then(json => this._gereLaReponse(json))
+        .catch(error => this.setState({estEnChangement: false, message: 'Quelque chose de mauvais s\'est produit' + error}))
+    };
     _auDemarrageDeLaRecherche = () =>{
         const requete = urlPourRequete(this.state.requeteDeRecherche);
-        /* const requete = 'https://restcountries.com/v3.1/name/' + this.state.requeteDeRecherche */
         this._executerRequete(requete);
     }
     render() {
-
-    return (
-        <View style={styles.conteneur}>
-            <Text style={styles.description}>Rechercher des pays à explorer!</Text>
-            <Text style={styles.description}>Rechercher par nom</Text>
-            <View style={styles.fluxDroite}>
-                <TextInput
+        const indicateurDeChangement = this.state.estEnChangement ? <ActivityIndicator size='large' color='0000ff'/> : null;
+        <Text style={styles.description}>{this.state.message}</Text>
+        return (
+            <View style={styles.conteneur}>
+                <Text style={styles.description}>
+                    Rechercher des pays à explorer!
+                </Text>
+                <Text style={styles.description}>
+                    Rechercher par nom
+                </Text>
+                <View style={styles.fluxDroite}>
+                    <TextInput 
                     underlineColorAndroid={'transparent'}
                     style={styles.requeteEntree}
-                    value={requeteDeRecherche}
-                    onChange={auchangementDeLaRecherche}
-                    placeholder="Rechercher par nom de pays"
-                />
-                <Button
-                    onPress={auDemarrageDeLaRecherche}
+                    value={this.state.requeteDeRecherche}
+                    onChange={this._auchangementDeLaRecherche}
+                    placeholder='Rechercher par nom de pays'/>
+                    <Button 
+                    onPress={this._auDemarrageDeLaRecherche}
                     color={'#48AAEC'}
-                    title="Démarrer"
-                />
+                    title='Démarrer'
+                    />
+                </View>
+                <Image source={require('./Ressources/pays.jpg')} style={styles.image}/>
+                {indicateurDeChangement}
             </View>
-            <Image
-                source={require('./Ressources/pays.jpg')}
-                style={styles.image}
-            />
-            <Text style={styles.description}>{message}</Text>
-        </View>
-    );
+        );
+    }
 }
+
 
 const styles = StyleSheet.create({
     description: {
@@ -91,14 +81,15 @@ const styles = StyleSheet.create({
     conteneur: {
         padding: 30,
         marginTop: 65,
-        alignItems: 'center',
+        alignItems: 'center'
+
     },
-    fluxDroite: {
+    fluxDroite:{
         flexDirection: 'row',
         alignItems: 'center',
         alignSelf: 'stretch',
     },
-    requeteEntree: {
+    requeteEntree:{
         height: 36,
         padding: 4,
         marginRight: 5,
@@ -109,9 +100,8 @@ const styles = StyleSheet.create({
         borderRadius: 8,
         color: '#48AAEC',
     },
-    image: {
+    image:{
         width: 220,
         height: 140,
-        paddingTop:10,
-    },
+    }
 });
