@@ -21,7 +21,7 @@ export default class PageDeRecherche extends Component<Props>{
         };
     }
     _auchangementDeLaRecherche = (event) =>{
-        this.setState({requeteDeRecherche: event.text});
+        this.setState({requeteDeRecherche: event.nativeEventtext});
     }
     _gereLaReponse = (reponse) =>{
         this.setState({estEnChangement: false, message: ''});
