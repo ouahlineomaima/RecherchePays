@@ -21,7 +21,7 @@ class ListItem extends React.PureComponent{
                 <View>
                     <View style={styles.conteneurLigne}>
                         <View style={styles.conteneurTexte}>
-                            <Text style={styles.nomOfficiel}>{item.name.official}</Text>
+                            <Text style={styles.nomOfficiel}>blabla{item.name.official}</Text>
                             <Text style={styles.autre}>{item.region}</Text>
                             <Text style={styles.autre}>{item.subregion}</Text>
                             <Text style={styles.autre}>{item.capital}</Text>
